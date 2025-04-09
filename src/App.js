@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Header from "./components/Header";
+import ToDoList from "./components/ToDoList";
+import ClickCounter from "./components/ClickCounter";
+import TicTacToe from "./components/TicTacToe";
+import Calculator from "./components/Calculator";
+import CepSearch from "./components/CepSearch";
 
 function App() {
+  const [page, setPage] = useState("To-Do List");
+
+  const renderPage = () => {
+    switch (page) {
+      case "To-Do List": return <ToDoList />;
+      case "Contador de Cliques": return <ClickCounter />;
+      case "Jogo da Velha": return <TicTacToe />;
+      case "Calculadora": return <Calculator />;
+      case "Buscador de CEP": return <CepSearch />;
+      default: return <ToDoList />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header setPage={setPage} />
+      <main className="p-6">{renderPage()}</main>
     </div>
   );
 }
 
 export default App;
+
