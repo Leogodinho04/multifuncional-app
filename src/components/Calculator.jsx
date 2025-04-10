@@ -35,7 +35,10 @@ function Calculator() {
             fontSize: "1.2rem"
           }}
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => {
+            const onlyValid = e.target.value.replace(/[^0-9+\-*/.%]/g, "");
+            setInput(onlyValid);
+          }}
           onKeyDown={(e) => {
             if (e.key === "Enter") handleEqual();
           }}
