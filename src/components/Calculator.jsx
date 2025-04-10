@@ -2,7 +2,6 @@ import { useState } from "react";
 
 function Calculator() {
   const [input, setInput] = useState("");
-  const [result, setResult] = useState(null);
 
   const handleClick = (value) => {
     setInput((prev) => prev + value);
@@ -10,15 +9,14 @@ function Calculator() {
 
   const handleClear = () => {
     setInput("");
-    setResult(null);
   };
 
   const handleEqual = () => {
     try {
       const res = eval(input); // simples para demonstração
-      setResult(res);
+      setInput(String(res)); // exibe o resultado no visor
     } catch {
-      setResult("Erro");
+      setInput("Erro"); // mostra erro no visor
     }
   };
 
@@ -70,11 +68,6 @@ function Calculator() {
             C
           </button>
         </div>
-        {result !== null && (
-          <p className="mt-4 text-center text-lg">
-            Resultado: <span className="font-bold">{result}</span>
-          </p>
-        )}
       </div>
     </div>
   );
