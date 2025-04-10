@@ -6,7 +6,7 @@ function Header({ setPage }) {
       {pages.map((page) => (
         <button
           key={page}
-          className="bg-white text-red-600 hover:bg-red-100 px-3 py-1 rounded transition"
+          className="bg-red-600 text-white hover:bg-[#2b2b2b] px-3 py-1 rounded transition"
           onClick={() => setPage(page)}
         >
           {page}

@@ -22,7 +22,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-blue-100">
+    <div className="min-h-screen bg-[#2b2b2b] text-white">
       <Header setPage={setPage} />
       <main className="flex-grow flex items-center justify-center p-6">
         {renderPage()}

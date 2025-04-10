@@ -21,7 +21,7 @@ function ToDoList() {
           onChange={(e) => setInput(e.target.value)}
           className="border p-2 mr-2"
         />
-        <button onClick={addTask} className="bg-green-500 text-white px-3 py-1 rounded">
+        <button onClick={addTask} className="bg-red-600 text-white px-3 py-1 rounded">
           Adicionar
         </button>
       </div>
