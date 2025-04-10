@@ -1,42 +1,75 @@
 import { useState } from "react";
 
 function Calculator() {
-  const [num1, setNum1] = useState("");
-  const [num2, setNum2] = useState("");
+  const [input, setInput] = useState("");
   const [result, setResult] = useState(null);
 
-  const handleOperation = (op) => {
-    const a = parseFloat(num1);
-    const b = parseFloat(num2);
-    if (isNaN(a) || isNaN(b)) return;
-    let res;
-    switch (op) {
-      case "+": res = a + b; break;
-      case "-": res = a - b; break;
-      case "*": res = a * b; break;
-      case "/": res = b !== 0 ? a / b : "Erro (divisão por zero)"; break;
-      default: return;
+  const handleClick = (value) => {
+    setInput((prev) => prev + value);
+  };
+
+  const handleClear = () => {
+    setInput("");
+    setResult(null);
+  };
+
+  const handleEqual = () => {
+    try {
+      const res = eval(input); // simples para demonstração
+      setResult(res);
+    } catch {
+      setResult("Erro");
     }
-    setResult(res);
   };
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4">Calculadora</h2>
-      <input className="border p-2 mr-2" value={num1} onChange={(e) => setNum1(e.target.value)} placeholder="Número 1" />
-      <input className="border p-2 mr-2" value={num2} onChange={(e) => setNum2(e.target.value)} placeholder="Número 2" />
-      <div className="my-2">
-        {["+", "-", "*", "/"].map((op) => (
+    <div className="p-4 flex justify-center">
+      <div className="bg-red-600 text-white p-6 rounded-lg shadow-md w-64">
+        <h2 className="text-xl font-bold mb-4 text-center">Calculadora</h2>
+        <input
+          className="w-full p-2 mb-2 rounded"
+          style={{
+            backgroundColor: "#c1f0c1", // verde visor
+            color: "#003300",           // texto verde escuro
+            fontFamily: "monospace",
+            fontSize: "1.2rem"
+          }}
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Digite a conta"
+        />
+        <div className="grid grid-cols-4 gap-2">
+          {["7", "8", "9", "/",
+            "4", "5", "6", "*",
+            "1", "2", "3", "-",
+            "0", ".", "%", "+"].map((btn) => (
+              <button
+                key={btn}
+                onClick={() => handleClick(btn)}
+                className="py-2 rounded text-lg font-bold bg-gray-800"
+              >
+                {btn}
+              </button>
+          ))}
           <button
-            key={op}
-            onClick={() => handleOperation(op)}
-            className="bg-gray-300 px-3 py-1 mx-1 rounded"
+            onClick={handleEqual}
+            className="col-span-2 bg-green-600 py-2 rounded font-bold"
           >
-            {op}
+            =
           </button>
-        ))}
+          <button
+            onClick={handleClear}
+            className="col-span-2 bg-gray-800 py-2 rounded font-bold"
+          >
+            C
+          </button>
+        </div>
+        {result !== null && (
+          <p className="mt-4 text-center text-lg">
+            Resultado: <span className="font-bold">{result}</span>
+          </p>
+        )}
       </div>
-      {result !== null && <p>Resultado: {result}</p>}
     </div>
   );
 }
