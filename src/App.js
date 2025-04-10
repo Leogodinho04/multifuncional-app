@@ -1,4 +1,5 @@
 import { useState } from "react";
+import './index.css';
 import Header from "./components/Header";
 import ToDoList from "./components/ToDoList";
 import ClickCounter from "./components/ClickCounter";
@@ -21,12 +22,13 @@ function App() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col bg-blue-100">
       <Header setPage={setPage} />
-      <main className="p-6">{renderPage()}</main>
+      <main className="flex-grow flex items-center justify-center p-6">
+        {renderPage()}
+      </main>
     </div>
   );
 }
 
 export default App;
-
