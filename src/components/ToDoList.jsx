@@ -31,6 +31,9 @@ function ToDoList() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") addTask();
+          }}
           className="bg-gray-800 text-white border border-gray-600 p-2 rounded mr-2"
         />
         <button onClick={addTask} className="bg-red-600 text-white px-3 py-2 rounded mr-2">

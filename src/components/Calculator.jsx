@@ -36,6 +36,9 @@ function Calculator() {
           }}
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleEqual();
+          }}
           placeholder="Digite a conta"
         />
         <div className="grid grid-cols-4 gap-2">
